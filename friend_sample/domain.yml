@@ -1,0 +1,54 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- start_conversation:
+    use_entities: true
+- user_story:
+    use_entities: true
+- user_story_detail:
+    use_entities: true
+- simulation_want:
+    use_entities: true
+- sim_story_1:
+    use_entities: true
+- sim_story_2:
+    use_entities: true
+- sim_terminate:
+    use_entities: true
+- terminate:
+    use_entities: true
+entities:
+- friend
+- sad
+slots:
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_start:
+  - text: 안녕하세요 <00>님. 오늘은 별일 없었나요?
+  utter_user_story:
+  - text: 저런.. 안좋은 일이 있었군요 ㅠ 무슨일이에요?
+  utter_user_story_detail:
+  - text: 친구가 <00>님의 기분을 무시하는 것 같아서 많이 슬펐겠군요 ㅠ 친구도 <00>님의 솔직한 기분에 대해 알아두면 좋을 것 같아요. 한번 제가 그 친구라고 생각하고 솔직한 감정을 말해보는게 어때요?
+  utter_simulation_want:
+  - text: '그래요. 그럼 제가 그 친구라고 생각해보세요! 시작! ::::: <00>야. 혹시 나에게 하고 싶은 말이 있어?'
+  utter_sim_story_1:
+  - text: 아..그랬구나..몰랐네 ㅠ 네가 내가 골라주는 건 다 만족하는 줄 알았지..
+  utter_sim_story_2:
+  - text: 알겠어! 다음부턴 그렇게 할게. 이제 하고 싶은말은 다 했어?
+  utter_sim_terminate:
+  - text: <00>님. 참 잘했어요. 앞으로도 이렇게 천천히 솔직하게 대화하는걸 연습해보면, 잘 얘기할 수 있을 거에요.
+  utter_terminate:
+  - text: 잘가요! 오늘도 좋은 하루 보내요!
+actions:
+- action_terminate
+- terminate
+forms: {}
+e2e_actions: []
